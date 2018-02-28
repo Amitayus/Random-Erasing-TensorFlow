@@ -150,9 +150,9 @@ def distorted_bounding_box_crop(image,
 
     # Crop the image to the specified bounding box.
     cropped_image = tf.slice(image, bbox_begin, bbox_size)
-    ###########################################################################
     
     # Random Erasing Data Augmentation.
+    ###########################################################################
     left_up=tf.zeros(3, dtype=tf.int32)
     right_down = left_up + tf.to_int32(bbox_size/4)
 
@@ -165,9 +165,9 @@ def distorted_bounding_box_crop(image,
 
     # Then, modify and concat
     part3_mod = tf.random_normal(tf.shape(part3), mean=0.0, stddev=1.0)
-    print('part3_mod', part3_mod.get_shape().as_list())
+    # print('part3_mod', part3_mod.get_shape().as_list())
     row2 = tf.concat([part2, part3_mod, part4], axis=1)
-    print('row2', row2.get_shape().as_list())
+    # print('row2', row2.get_shape().as_list())
     random_erased = tf.concat([part1, 
                                row2,
                                part5], axis=0)
